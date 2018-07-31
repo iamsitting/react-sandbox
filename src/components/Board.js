@@ -3,19 +3,17 @@ import {Square} from "./Square"
 
 export const Board = (props) => {
 
-  const makeRows = () => {
-    const renderSquare = (i) => <Square key={i} value={props.squares[i]} handleClick={() => props.handleClick(i)}/>
-    let counter = [0, 1, 2];
-    let rows = counter.map((j) => {
-      let sqs = counter.map((k) => renderSquare((j+k) + (j*2)))
-      return <div key={j} className="board-row">{sqs}</div>;
-    });
-    return rows;
-  };
+  const renderSquare = (i) => <Square key={i} value={props.squares[i]} handleClick={() => props.handleClick(i)}/>
+
+  const renderRow = (row, arr) => arr.map((k) => renderSquare((row+k) + (row*2)))
+
+  const renderBoard = (arr) => arr.map((j) => <div key={j} className="board-row">{renderRow(j, arr)}</div>)
+
+  const nToArray = (n) => [...Array(n).keys()]
 
   return (
     <React.Fragment>
-      {makeRows()}
+      {renderBoard(nToArray(3))}
     </React.Fragment>
   );
 }

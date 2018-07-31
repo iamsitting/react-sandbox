@@ -1,20 +1,17 @@
-import React from "react";
-import {Board} from "./Board";
-import {HistoryList} from "../components/HistoryList"
+import React from "react"
+import {HistoryListContainer} from "../containers/HistoryListContainer"
+import {BoardContainer} from "../containers/BoardContainer"
 
 export const Game = (props) => {
   return (
     <div className="game">
       <div className="game-board">
-        <Board squares={props.current.squares} handleClick={props.handleClick}/>
+        <BoardContainer squares={props.current.squares}/>
       </div>
       <div className="game-info">
         <div>{props.status}</div>
         <ol>
-          <HistoryList jumpTo={props.jumpTo}
-          history={props.history}
-          stepNumber={props.stepNumber}
-          />
+          <HistoryListContainer history={props.history} stepNumber={props.stepNumber} />
         </ol>
       </div>
     </div>
