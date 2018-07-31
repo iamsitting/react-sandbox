@@ -1,38 +1,51 @@
 import { createStore } from 'redux';
-import { PRELOAD } from '../utils/utils'
+import {calculateWinner} from "../utils/utils"
+
+const PRELOAD = {
+  history: [{
+    squares: Array(9).fill(null),
+    row: 0,
+    col: 0,
+    winner: null
+  }],
+  stepNumber: 0,
+  xIsNext: true,
+};
 
 const reducer = (state, action) => {
   let nState = {};
+  let history, stepNumber, xIsNext;
 
   switch(action.type){
     case 'MOVE':
-      const history = state.history.slice(0, state.stepNumber + 1);
-      const current = history[history.length - 1];
-      const squares = current.squares.slice();
+      let hist = state.history.slice(0, state.stepNumber + 1);
+      let current = hist[hist.length - 1];
+      let squares = current.squares.slice();
       squares[action.index] = state.xIsNext ? "X" : "O";
+      let winner = calculateWinner(squares);
 
-      nState = {
-        history: history.concat([{
-          squares: squares,
-          row: (action.index / 3 >> 0) + 1,
-          col: (action.index % 3) + 1
-        }]),
-        stepNumber: history.length,
-        xIsNext: !state.xIsNext
-      }
-      return nState
+      history = hist.concat([{
+        squares: squares,
+        row: (action.index / 3 >>0) + 1,
+        col: (action.index % 3) + 1,
+        winner: winner
+      }]);
+      stepNumber = hist.length;
+      xIsNext = !state.xIsNext;
+
+      break;
     case 'JUMP':
-      nState = {
-        history: state.history,
-        stepNumber: action.index,
-        xIsNext: (action.index % 2) === 0
-      }
-      return nState
+      history = state.history;
+      stepNumber = action.index;
+      xIsNext = (action.index % 2) === 0;
+      break;
     default:
       return {...state};
   }
+  nState.history = history;
+  nState.stepNumber = stepNumber;
+  nState.xIsNext = xIsNext;
+  return nState;
 }
 
-const store = createStore(reducer, PRELOAD);
-
-export default store
+export const store = createStore(reducer, PRELOAD);

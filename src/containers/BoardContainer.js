@@ -1,7 +1,6 @@
 import React from "react";
 import {Board} from "../components/Board"
-import store from "../reducers/reducers"
-import {calculateWinner} from "../utils/utils"
+import {store} from "../reducers/reducers"
 
 export const BoardContainer = (props) => {
 
@@ -10,8 +9,7 @@ export const BoardContainer = (props) => {
     const history = state.history.slice(0, state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const winner = calculateWinner(squares);
-    if (winner || squares[i]) {
+    if (current.winner || squares[i]) {
       return;
     }
 
@@ -19,6 +17,6 @@ export const BoardContainer = (props) => {
   }
 
   return (
-    <Board handleClick={handleClick} squares={props.squares}/>
+    <Board handleClick={handleClick} squares={props.squares} />
   );
 }

@@ -2,7 +2,7 @@ import {GameContainer} from "./containers/GameContainer";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import store from "./reducers/reducers"
+import {store} from "./reducers/reducers"
 
 // ========================================
 
@@ -15,4 +15,3 @@ const render = () => {
 
 store.subscribe(render);
 render();
-

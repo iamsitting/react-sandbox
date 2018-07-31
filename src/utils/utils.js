@@ -18,15 +18,3 @@ export function calculateWinner(squares){
   }
   return null;
 }
-
-export const PRELOAD = {
-  history: [{
-    squares: Array(9).fill(null),
-    row: 0,
-    col: 0,
-  }],
-  xIsNext: true,
-  stepNumber: 0,
-  // winningSquares: Array(3).fill(null),
-};
-

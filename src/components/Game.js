@@ -11,7 +11,10 @@ export const Game = (props) => {
       <div className="game-info">
         <div>{props.status}</div>
         <ol>
-          <HistoryListContainer history={props.history} stepNumber={props.stepNumber} />
+          <HistoryListContainer
+          history={props.history}
+          stepNumber={props.stepNumber}
+          />
         </ol>
       </div>
     </div>

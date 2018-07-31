@@ -1,5 +1,5 @@
 import React from "react";
-import store from "../reducers/reducers"
+import {store} from "../reducers/reducers"
 import {HistoryList} from "../components/HistoryList"
 
 export const HistoryListContainer = (props) => props.history.map((step, move) => {
@@ -13,7 +13,8 @@ export const HistoryListContainer = (props) => props.history.map((step, move) =>
     "Go to game start";
 
   return (
-    <HistoryList description={desc}
+    <HistoryList key={move}
+    description={desc}
     move={move}
     bold={bold}
     jumpTo={() => jumpTo(move)}

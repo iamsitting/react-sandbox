@@ -3,7 +3,7 @@ import {Square} from "./Square"
 
 export const Board = (props) => {
 
-  const renderSquare = (i) => <Square key={i} value={props.squares[i]} handleClick={() => props.handleClick(i)}/>
+  const renderSquare = (i) => <Square i={i} key={i} value={props.squares[i]} handleClick={() => props.handleClick(i)}/>
 
   const renderRow = (row, arr) => arr.map((k) => renderSquare((row+k) + (row*2)))
 

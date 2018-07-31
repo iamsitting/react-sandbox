@@ -1,9 +1,8 @@
 import React from "react";
-import store from "../reducers/reducers"
 
 export const HistoryList = (props) => {
   return (
-    <li key={props.move}>
+    <li>
       <button onClick={props.jumpTo} className={props.bold ? "bold" : ""}>{props.description}</button>
     </li>
   );
