@@ -10,11 +10,12 @@ const PRELOAD = {
   }],
   stepNumber: 0,
   xIsNext: true,
+  isReversed: false
 };
 
 const reducer = (state, action) => {
   let nState = {};
-  let history, stepNumber, xIsNext;
+  let history, stepNumber, xIsNext, isReversed;
 
   switch(action.type){
     case 'MOVE':
@@ -32,12 +33,20 @@ const reducer = (state, action) => {
       }]);
       stepNumber = hist.length;
       xIsNext = !state.xIsNext;
+      isReversed = state.isReversed;
 
       break;
     case 'JUMP':
       history = state.history;
       stepNumber = action.index;
       xIsNext = (action.index % 2) === 0;
+      isReversed = state.isReversed;
+      break;
+    case 'REVERSE':
+      history = state.history;
+      stepNumber = state.stepNumber;
+      xIsNext = state.xIsNext;
+      isReversed = !state.isReversed;
       break;
     default:
       return {...state};
@@ -45,6 +54,7 @@ const reducer = (state, action) => {
   nState.history = history;
   nState.stepNumber = stepNumber;
   nState.xIsNext = xIsNext;
+  nState.isReversed = isReversed;
   return nState;
 }
 

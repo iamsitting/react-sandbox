@@ -17,6 +17,12 @@ ol, ul {
   font-weight: bold;
 }
 
+.column-reversed {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+}
+
 .status {
   margin-bottom: 10px;
 }
