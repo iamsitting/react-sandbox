@@ -1,24 +1,9 @@
 import React from "react";
-
-function Square(props) {
-  const winning = false;
-  return (
-    <button
-      className={"square " + (winning ? "winning-square" : "")} onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
+import Square from "./Square"
 
 class Board extends React.Component {
 
   renderSquare(i) {
-    console.log('no');
-    console.log(this.props.winningSquares);
-    if(this.props.winningSquares.filter(n => n).length){
-      console.log('hi');
-    }
-
     return (
       <Square key={i}
         value={this.props.squares[i]}

@@ -1,4 +1,4 @@
-import Game from "./Game";
+import GameContainer from "./containers/GameContainer";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -6,6 +6,6 @@ import "./index.css";
 // ========================================
 
 ReactDOM.render(
-  <Game />,
+  <GameContainer />,
   document.getElementById('root')
 );
