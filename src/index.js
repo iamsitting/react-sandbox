@@ -1,4 +1,4 @@
-import GameContainer from "./containers/GameContainer";
+import {GameContainer} from "./containers/GameContainer";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";

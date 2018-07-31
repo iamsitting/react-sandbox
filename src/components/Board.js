@@ -1,36 +1,21 @@
 import React from "react";
-import Square from "./Square"
+import {Square} from "./Square"
 
-class Board extends React.Component {
+export const Board = (props) => {
 
-  renderSquare(i) {
-    return (
-      <Square key={i}
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
-    );
-  }
+  const makeRows = () => {
+    const renderSquare = (i) => <Square key={i} value={props.squares[i]} handleClick={() => props.handleClick(i)}/>
+    let counter = [0, 1, 2];
+    let rows = counter.map((j) => {
+      let sqs = counter.map((k) => renderSquare((j+k) + (j*2)))
+      return <div key={j} className="board-row">{sqs}</div>;
+    });
+    return rows;
+  };
 
-  makeRows() {
-    let row = [];
-    for (let j=0; j<3; j++){
-      let sqs = [];
-      for (let k=0; k<3; k++){
-        sqs.push(this.renderSquare((j+k) + (j*2)))
-      }
-      row.push(<div key={j} className="board-row">{sqs}</div>)
-    }
-    return row;
-  }
-
-  render() {
-    return (
-      <div>
-        {this.makeRows()}
-      </div>
-    );
-  }
+  return (
+    <React.Fragment>
+      {makeRows()}
+    </React.Fragment>
+  );
 }
-
-export default Board

@@ -3,11 +3,9 @@ import { PRELOAD } from '../utils/utils'
 
 const reducer = (state, action) => {
   let nState = {};
-  console.log(action.index);
 
   switch(action.type){
     case 'MOVE':
-      console.log(state);
       const history = state.history.slice(0, state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
@@ -31,7 +29,6 @@ const reducer = (state, action) => {
       }
       return nState
     default:
-      console.log(-1);
       return {...state};
   }
 }
