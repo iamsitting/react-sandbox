@@ -1,4 +1,4 @@
-function calculateWinner(squares){
+export function calculateWinner(squares){
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -19,4 +19,14 @@ function calculateWinner(squares){
   return null;
 }
 
-export default calculateWinner
+export const PRELOAD = {
+  history: [{
+    squares: Array(9).fill(null),
+    row: 0,
+    col: 0,
+  }],
+  xIsNext: true,
+  stepNumber: 0,
+  // winningSquares: Array(3).fill(null),
+};
+

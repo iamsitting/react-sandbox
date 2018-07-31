@@ -1,7 +1,7 @@
 import React from "react";
 import Board from "./Board";
 import HistoryList from "./HistoryList"
-import calculateWinner from "../utils/utils"
+import {calculateWinner} from "../utils/utils"
 
 class Game extends React.Component {
   render(){
