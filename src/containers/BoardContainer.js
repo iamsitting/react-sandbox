@@ -3,6 +3,8 @@ import { connect } from "react-redux"
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    history: state.history,
+    stepNumber: state.stepNumber,
     squares: ownProps.squares,
   };
 }

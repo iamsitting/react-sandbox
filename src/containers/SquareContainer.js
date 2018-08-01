@@ -7,6 +7,8 @@ const mapStateToProps = (state, ownProps) => {
     history: state.history,
     stepNumber: state.stepNumber,
     index: ownProps.index,
+    value: ownProps.value,
+    current: ownProps.current,
   };
 }
 

@@ -1,9 +1,12 @@
-import React from "react";
+import React from "react"
 import {SquareContainer} from "../containers/SquareContainer"
+import PropTypes from 'prop-types'
 
-export const Board = ({squares}) => {
+export const Board = ({history, stepNumber, squares}) => {
+  const hist = history.slice(0, stepNumber + 1);
+  const current = hist[hist.length - 1];
 
-  const renderSquare = (index) => <SquareContainer index={index} key={index} value={squares[index]}/>
+  const renderSquare = (index) => <SquareContainer current={current} index={index} key={index} value={squares[index]}/>
 
   const renderRow = (row, arr) => arr.map((k) => renderSquare((row+k) + (row*2)))
 
@@ -17,3 +20,10 @@ export const Board = ({squares}) => {
     </React.Fragment>
   );
 }
+
+
+Board.propTypes = {
+  squares: PropTypes.array,
+  history: PropTypes.array,
+  stepNumber: PropTypes.number,
+};

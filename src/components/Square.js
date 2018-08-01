@@ -1,25 +1,27 @@
 import React from "react"
+import PropTypes from 'prop-types'
 
-export const Square = ({...props}) => {
+export const Square = ({index, value, current, makeMove}) => {
+
+  const winning = current.winner ? current.winner.includes(index) : null;
+
   const handleClick = (i) => {
-    const history = props.history.slice(0, props.stepNumber + 1);
-    const current = history[history.length - 1];
-    const squares = current.squares.slice();
-    if (current.winner || squares[i]) {
-      return;
+    if (!(current.winnder || current.squares[i])){
+      makeMove(i)
     }
-
-    props.makeMove(i);
   }
 
-  const history = props.history;
-  const current = history[props.stepNumber];
-  const winner = current.winner;
-  const winning = winner ? winner.includes(props.index) : null;
   return (
     <button
-      className={"square " + (winning ? "winning" : "")} onClick={() => handleClick(props.index)}>
-      {props.value}
+      className={"square " + (winning ? "winning" : "")} onClick={() => handleClick(index)}>
+      {value}
     </button>
   );
 }
+
+Square.propTypes = {
+  index: PropTypes.number,
+  value: PropTypes.string,
+  current: PropTypes.object,
+  makeMove: PropTypes.func
+};
