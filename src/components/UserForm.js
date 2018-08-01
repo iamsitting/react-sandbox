@@ -1,23 +1,38 @@
 import React from "react"
-import "muicss/dist/css/mui-noglobals.css"
 
 export const UserForm = ({...props}) => {
-// <input className="mui-textfield" type="text"  placeholder="username" />
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    props.createUser(e.target.username.value);
+    e.target.username.value = '';
+  }
+  let status = 'Select Player 1';
+  if (props.players[0] !== null){
+    status = "Select Player 2";
+  } else if (props.players[1] !== null){
+    status = "Done!";
+  }
   return (
-    <div>
-      <form className="mui-form--inline" onSubmit={(e) => {
-          e.preventDefault()
-          props.createUser(e.target.username.value)}}>
+    <React.Fragment>
+    <div className="mui-panel">
+      <h3>{status}</h3>
+      <div className="btn-group--vertical">
+        {props.users.map(item => <button onClick={() => props.chooseThisPlayer(item)}className="mui-btn mui-btn--primary" key={item.id}>{item.username}</button>)}
+      </div>
+    </div>
+    <div className="mui-panel">
+      <form className="mui-form--inline" onSubmit={(e) => {onSubmitForm(e)}}>
           <div className="mui-textfield mui-textfield--float-label">
             <input type="text" name="username" />
             <label>New User</label>
           </div>
-         <input className="mui-btn mui-btn--primary" type="submit" name="create-user" />
+         <button className="mui-btn mui-btn--primary" type="submit" name="create-user">Create User</button>
       </form>
-      <ul>
-        {props.users.map(item => <li key={item.id}>{item.username}<button
-        onClick={() => props.deleteUser(item.id)}>x</button></li>)}
-      </ul>
+      <div className="btn-group--vertical">
+        {props.users.map(item => <button key={item.id} className="mui-btn mui-btn--danger"
+        onClick={() => props.deleteUser(item.id)}>{item.username}</button>)}
+      </div>
     </div>
+    </React.Fragment>
   );
 }

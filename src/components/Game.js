@@ -7,10 +7,10 @@ export const Game = ({...props}) => {
 
   return (
     <div className="game">
-      <div className="game-board">
+      <div className="game-board mui-col-md-2 mui-col-xs-6">
         <BoardContainer />
       </div>
-      <div className="game-info">
+      <div className="game-info mui-col-md-4">
         <GameInfoContainer />
       </div>
       <div>

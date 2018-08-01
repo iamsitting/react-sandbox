@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux"
 import {calculateWinner} from "../utils/utils"
 import thunkMiddleware from "redux-thunk"
-import {MOVE, JUMP, REVERSE, GET_USERS, CREATE_USER, DELETE_USER} from "../utils/actions"
+import {MOVE, JUMP, REVERSE, GET_USERS, CREATE_USER, DELETE_USER, CHOOSE_PLAYER} from "../utils/actions"
 
 const PRELOAD = {
   history: [{
@@ -14,13 +14,17 @@ const PRELOAD = {
   xIsNext: true,
   isReversed: false,
   users: [],
+  players: Array(2).fill(null),
 };
 
 const reducer = (state, action) => {
   let nState = {};
+  const findFirstNull = (el) => el === null
+  const pl = state.players.findIndex(findFirstNull);
 
   switch(action.type){
     case MOVE:
+      if (pl >= 0) return state;
       let history = state.history.slice(0, state.stepNumber + 1);
       let current = history[history.length - 1];
       let squares = current.squares.slice();
@@ -40,6 +44,14 @@ const reducer = (state, action) => {
       nState = {...state};
       nState.stepNumber = action.index;
       nState.xIsNext = (action.index % 2) === 0;
+      return nState;
+    case CHOOSE_PLAYER:
+      nState = {...state};
+      if (pl >= 0){
+        let x = nState.players.slice();
+        x[pl] = action.player;
+        nState.players = x;
+      }
       return nState;
     case REVERSE:
       nState = {...state};

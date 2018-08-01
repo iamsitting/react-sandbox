@@ -9,6 +9,7 @@ export const CREATE_USER = 'create user'
 export const MOVE = 'move'
 export const JUMP = 'jump'
 export const REVERSE = 'reverse'
+export const CHOOSE_PLAYER = 'choose player'
 
 /**
 * FIREBASE CONSTANTS
@@ -28,6 +29,7 @@ export const deleteUser = (user) => ({type: DELETE_USER, user})
 export const makeMove = (index) => ({type: MOVE, index})
 export const jumpToMove = (index) => ({type: JUMP, index})
 export const toggleReverse = (index) => ({type: REVERSE})
+export const choosePlayer = (player) => ({type: CHOOSE_PLAYER, player})
 
 /**
 * LISTENERS
