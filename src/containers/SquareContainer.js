@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     stepNumber: state.stepNumber,
     index: ownProps.index,
     value: ownProps.value,
-    current: ownProps.current,
+    latest: ownProps.latest,
   };
 }
 

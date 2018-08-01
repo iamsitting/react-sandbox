@@ -1,12 +1,12 @@
 import React from "react"
 import PropTypes from 'prop-types'
 
-export const Square = ({index, value, current, makeMove}) => {
+export const Square = ({index, value, latest, makeMove}) => {
 
-  const winning = current.winner ? current.winner.includes(index) : null;
+  const winning = latest.winner ? latest.winner.includes(index) : null;
 
   const handleClick = (i) => {
-    if (!(current.winnder || current.squares[i])){
+    if (!(latest.winner || latest.squares[i])){
       makeMove(i)
     }
   }
@@ -22,6 +22,6 @@ export const Square = ({index, value, current, makeMove}) => {
 Square.propTypes = {
   index: PropTypes.number,
   value: PropTypes.string,
-  current: PropTypes.object,
+  latest: PropTypes.object,
   makeMove: PropTypes.func
 };

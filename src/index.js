@@ -1,4 +1,4 @@
-import {GameContainer} from "./containers/GameContainer"
+import {Game} from "./components/Game"
 import React from "react"
 import {render} from "react-dom"
 import {Provider} from "react-redux"
@@ -7,16 +7,9 @@ import {store} from "./utils/reducers"
 
 // ========================================
 
-// const render = () => {
-//   ReactDOM.render(
-//     <Game />,
-//     document.getElementById('root')
-//   );
-// };
-
 render(
   <Provider store={store}>
-    <GameContainer />
+    <Game />
   </Provider>,
   document.getElementById('root')
 )
