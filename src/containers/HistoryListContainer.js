@@ -1,23 +1,18 @@
-import React from "react";
-import {store} from "../reducers/reducers"
 import {HistoryList} from "../components/HistoryList"
+import {jumpToMove} from "../utils/actions"
+import { connect } from "react-redux"
 
-export const HistoryListContainer = (props) => props.history.map((step, move) => {
+const mapStateToProps = state => {
+  return {
+    history: state.history,
+    stepNumber: state.stepNumber,
+  };
+}
 
-  const jumpTo = (index) => store.dispatch({type: 'JUMP', index: index})
+const mapDispatchToProps = dispatch => {
+  return {
+    jumpTo: index => dispatch(jumpToMove(index))
+  };
+};
 
-  const bold = props.stepNumber === move;
-  const loc = " (" + step.col + "," + step.row + ")";
-  const desc = move ?
-    "Go to move #" + move + loc :
-    "Go to game start";
-
-  return (
-    <HistoryList key={move}
-    description={desc}
-    move={move}
-    bold={bold}
-    jumpTo={() => jumpTo(move)}
-    />
-  );
-});
+export const HistoryListContainer = connect(mapStateToProps, mapDispatchToProps)(HistoryList)

@@ -1,15 +1,24 @@
 import React from "react"
-import {store} from "../reducers/reducers"
 
-export const Square = (props) => {
-  const state = store.getState();
-  const history = state.history;
-  const current = history[state.stepNumber];
+export const Square = ({...props}) => {
+  const handleClick = (i) => {
+    const history = props.history.slice(0, props.stepNumber + 1);
+    const current = history[history.length - 1];
+    const squares = current.squares.slice();
+    if (current.winner || squares[i]) {
+      return;
+    }
+
+    props.makeMove(i);
+  }
+
+  const history = props.history;
+  const current = history[props.stepNumber];
   const winner = current.winner;
-  const winning = winner ? winner.includes(props.i) : null;
+  const winning = winner ? winner.includes(props.index) : null;
   return (
     <button
-      className={"square " + (winning ? "winning" : "")} onClick={props.handleClick}>
+      className={"square " + (winning ? "winning" : "")} onClick={() => handleClick(props.index)}>
       {props.value}
     </button>
   );

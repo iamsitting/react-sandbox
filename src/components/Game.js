@@ -1,19 +1,11 @@
 import React from "react"
-import {HistoryListContainer} from "../containers/HistoryListContainer"
 import {BoardContainer} from "../containers/BoardContainer"
-import {store} from "../reducers/reducers"
+import {GameInfoContainer} from "../containers/GameInfoContainer"
+import PropTypes from 'prop-types'
 
-export const Game = (props) => {
-  const state = store.getState();
-  const history = state.history;
-  const current = history[state.stepNumber];
-  let status = current.winner ?
-    "Winner: " + current.squares[current.winner[0]] :
-    "Next player: " + (state.xIsNext ? "X" : "O");
+export const Game = ({history, stepNumber}) => {
 
-  const toggleReverse = () => {
-    store.dispatch({type: 'REVERSE'});
-  }
+  const current = history[stepNumber];
 
   return (
     <div className="game">
@@ -21,15 +13,13 @@ export const Game = (props) => {
         <BoardContainer squares={current.squares}/>
       </div>
       <div className="game-info">
-        <div>{status}</div>
-        <button onClick={toggleReverse}>Toggle List Order</button>
-        <ol className={state.isReversed ? "column-reversed" : ""}>
-          <HistoryListContainer
-          history={history}
-          stepNumber={state.stepNumber}
-          />
-        </ol>
+        <GameInfoContainer />
       </div>
     </div>
   );
 }
+
+Game.propTypes = {
+  history: PropTypes.array,
+  stepNumber: PropTypes.number,
+};

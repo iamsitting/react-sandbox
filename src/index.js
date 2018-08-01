@@ -1,17 +1,24 @@
-import {Game} from "./components/Game";
-import React from "react";
-import ReactDOM from "react-dom";
+import {GameContainer} from "./containers/GameContainer"
+import React from "react"
+import {render} from "react-dom"
+import {Provider} from "react-redux"
 import "./index.css";
-import {store} from "./reducers/reducers"
+import {store} from "./utils/reducers"
 
 // ========================================
 
-const render = () => {
-  ReactDOM.render(
-    <Game />,
-    document.getElementById('root')
-  );
-};
+// const render = () => {
+//   ReactDOM.render(
+//     <Game />,
+//     document.getElementById('root')
+//   );
+// };
 
-store.subscribe(render);
-render();
+render(
+  <Provider store={store}>
+    <GameContainer />
+  </Provider>,
+  document.getElementById('root')
+)
+
+

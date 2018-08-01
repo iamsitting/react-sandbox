@@ -1,9 +1,9 @@
 import React from "react";
-import {Square} from "./Square"
+import {SquareContainer} from "../containers/SquareContainer"
 
-export const Board = (props) => {
+export const Board = ({squares}) => {
 
-  const renderSquare = (i) => <Square i={i} key={i} value={props.squares[i]} handleClick={() => props.handleClick(i)}/>
+  const renderSquare = (index) => <SquareContainer index={index} key={index} value={squares[index]}/>
 
   const renderRow = (row, arr) => arr.map((k) => renderSquare((row+k) + (row*2)))
 
